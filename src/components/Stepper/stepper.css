@@ -1,0 +1,29 @@
+.step-item {
+  @apply relative flex flex-col justify-center items-center w-60;
+}
+.step-item:not(:first-child):before {
+  @apply content-[''] bg-[#a2cffe] absolute w-[60%] h-[3px] right-[70%] top-1/4 -translate-y-2/4 rounded-full;
+}
+.step {
+  @apply w-10 h-10 flex items-center justify-center z-10 relative bg-[#a2cffe] rounded-full font-semibold text-white;
+}
+.active .step {
+  @apply bg-[#0468c8] border-4 border-solid border-[#8ec5f8] border-opacity-60;
+}
+.complete .step {
+  @apply bg-[#008c76];
+}
+.complete p {
+  @apply text-white;
+}
+.complete:not(:first-child):before,
+.active:not(:first-child):before {
+  @apply bg-green-600;
+}
+
+.progress-ring__circle {
+  stroke-dasharray: 410, 400;
+  transition: stroke-dashoffset 0.35s;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
