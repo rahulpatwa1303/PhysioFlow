@@ -11,6 +11,7 @@ import Payment from "./form/Payment";
 import PersonalInfoForm from "./form/PersonalInfo";
 import { ApiSubmission } from "./DialogContent";
 import { useToast } from "@/components/Toast/ToastProvider";
+import axios from "axios";
 
 function Page() {
   const formInitalValue = {
@@ -257,23 +258,27 @@ function Page() {
         title: "Submitting details",
       },
     });
-    const submitProgressOfApi = await fetch("/api/patients", {
-      method: "POST",
-      body: JSON.stringify(form),
-    });
-    if (submitProgressOfApi.ok) {
-      try {
-        await new Promise((resolve) => setTimeout(resolve, 5000));
-        handleModelClose();
-        updateForm({ ...formInitalValue });
-        updateFormStatus({ ...formStatus, currentStep: 1 });
-        const responseData = await submitProgressOfApi.json();
-      } catch (error) {
-        console.error("Error during delay or model close:", error);
-      }
-    } else {
-      console.error("Error submitting form:", submitProgressOfApi.statusText);
-    }
+
+    const submitProgressOfApi = await axios
+      .post("/api/patients", {
+        ...form,
+      })
+      .then(async (resp) => {
+        console.log(resp);
+        if (resp.statusText === "OK") {
+          try {
+            await new Promise((resolve) => setTimeout(resolve, 5000));
+            handleModelClose();
+            updateForm({ ...formInitalValue });
+            updateFormStatus({ ...formStatus, currentStep: 1 });
+          } catch (error) {
+            console.error("Error during delay or model close:", error);
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("Error submitting form:", error);
+      });
   }
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import BottomNavBar from "@/components/BottomNav/BottomNavBar";
 import Header from "@/components/Header/Header";
 import ToastContainer from "@/components/Toast/ToastContainer";
 import { ToastProvider } from "@/components/Toast/ToastProvider";
+import Provider from "@/utils/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ export default function RootLayout({ children }) {
       <ToastProvider>
         <body className={inter.className}>
           <Header />
-          {children}
+          <Provider>{children}</Provider>
           <ToastContainer />
           <div className="w-full flex items-center justify-center absolute bottom-0 px-4 py-4 pb-2 ">
             <BottomNavBar />

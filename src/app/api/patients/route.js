@@ -27,14 +27,12 @@ const formInitalValue = {
 };
 
 export async function POST(request) {
-  const body = await request.json();
-
-  // Validate incoming fields against expected fields
-  const expectedFields = Object.keys(formInitalValue); // Get expected fields from formInitalValue
-  const validFields = Object.keys(body).filter((field) =>
+  const data = await request.json();
+  const expectedFields = Object.keys(formInitalValue); 
+  const validFields = Object.keys(data).filter((field) =>
     expectedFields.includes(field)
   );
-  const extraFields = Object.keys(body).filter(
+  const extraFields = Object.keys(data).filter(
     (field) => !expectedFields.includes(field)
   );
 
@@ -46,9 +44,10 @@ export async function POST(request) {
   }
 
   // Add createdAt and updatedAt fields with current timestamp
-  body.createdAt = new Date();
-  body.updatedAt = new Date();
+  data.createdAt = new Date();
+  data.updatedAt = new Date();
+  data.isActive = true
 
-  const allPosts = await db.collection("patient").insertOne(body);
+  const allPosts = await db.collection("patient").insertOne(data);
   return NextResponse.json({ status: 200 });
 }

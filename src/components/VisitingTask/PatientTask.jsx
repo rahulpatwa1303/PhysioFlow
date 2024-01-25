@@ -2,12 +2,13 @@ import { MoreVertical } from "lucide-react";
 import { useState } from "react";
 import "./Patient.css";
 
-function PatientTask({openTaskModel}) {
+function PatientTask({openTaskModel,data,visitStatusChange,type}) {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
+    visitStatusChange(type,data._id)
   };
+  
 
   return (
     <div className="bg-white p-4 rounded-lg group/task flex justify-between">
@@ -18,6 +19,7 @@ function PatientTask({openTaskModel}) {
               id="cbx-12"
               type="checkbox"
               onChange={handleCheckboxChange}
+              checked={data.isComplete}
             />
             <label></label>
             <svg width="15" height="14" viewBox="0 0 15 14" fill="none">
@@ -45,11 +47,11 @@ function PatientTask({openTaskModel}) {
         </div>
         <span
           className={`${
-            isChecked ? "checkbox-label checked" : "checkbox-label"
+            data.isComplete ? "checkbox-label checked" : "checkbox-label"
           }`}
           onClick={openTaskModel}
         >
-          To-Do
+          {data.patient.name}
         </span>
       </div>
       <div className="hidden sm:block">
