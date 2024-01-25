@@ -128,32 +128,6 @@ function Page() {
   ];
   const currentMonthShortName = monthShortNames[currentDate.getMonth()];
 
-  // const fetchVisitForSelectedDate = async () => {
-  //   const fetchForYear = new Date().getFullYear();
-  //   const fetchForMonth = new Date().getMonth();
-  //   const formattedDate = `${fetchForYear}-${fetchForMonth + 1}-${
-  //     pageInfo.date
-  //   }`;
-
-  //   const submitProgressOfApi = await axios
-  //     .get(`/api/visits/per_day_visit/?date=${formattedDate}`)
-  //     .then((resp) => {
-  //       const pendingVisits = resp.data.visitsForTheDate.filter(
-  //         (visit) => !visit.isComplete
-  //       );
-  //       const completedVisits = resp.data.visitsForTheDate.filter(
-  //         (visit) => visit.isComplete
-  //       );
-  //       setPageInfo({
-  //         type: "VISIT_DATA",
-  //         payload: {
-  //           pendingVisits,
-  //           completedVisits,
-  //           data: resp.data.visitsForTheDate,
-  //         },
-  //       });
-  //     });
-  // };
   const queryKey = ["visits", pageInfo.date];
   const { isLoading, error, data, isFetching } = useQuery(
     queryKey,
@@ -181,7 +155,7 @@ function Page() {
       };
     }
   );
-
+  console.log("error", error);
   const CalenderDate = ({ selected, date }) => {
     return (
       <div
@@ -246,19 +220,16 @@ function Page() {
     }
   }, [today, daysArray, pageInfo.date]);
 
-  // useEffect(() => {
-  //   fetchVisitForSelectedDate();
-  // }, [pageInfo.date]);
-
   useEffect(() => {
     if (!isLoading && !error) {
-      console.log("data", data);
       setPageInfo({
         type: data.data.length ? "VISIT_DATA" : "NO_DATA",
         payload: data,
       });
     }
   }, [data, isLoading, error, setPageInfo]);
+
+  console.log('pageInfo',pageInfo)
 
   return (
     <div style={{ height: "calc(100vh - 60px)" }}>
