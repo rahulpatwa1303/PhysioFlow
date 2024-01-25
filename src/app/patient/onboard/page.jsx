@@ -264,7 +264,6 @@ function Page() {
         ...form,
       })
       .then(async (resp) => {
-        console.log(resp);
         if (resp.statusText === "OK") {
           try {
             await new Promise((resolve) => setTimeout(resolve, 5000));

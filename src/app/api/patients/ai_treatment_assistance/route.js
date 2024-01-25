@@ -8,7 +8,6 @@ const genAI = new GoogleGenerativeAI(process.env.BARD_API_KEY);
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
 });
-console.log("replicate", replicate);
 
 export async function POST() {
 //   const output = await replicate.run(
@@ -42,6 +41,5 @@ const prompt = "You are a helpful, respectful and honest physiotherapist. Always
 // };
 
 const result = await model.generateContent([prompt]);
-console.log(result.response.text());
   return NextResponse.json({result})
 }

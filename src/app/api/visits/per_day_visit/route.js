@@ -56,7 +56,6 @@ export async function POST() {
   const patients = await db.collection("patient").find({}).toArray();
   const date = new Date().setHours(0, 0, 0, 0);
   patients.map(async (patient) => {
-    console.log("patient", patient);
     if (patient.isActive) {
       await db.collection("visits_for_the_day").insertOne({
         date,

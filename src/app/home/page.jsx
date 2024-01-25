@@ -155,7 +155,7 @@ function Page() {
       };
     }
   );
-  console.log("error", error);
+
   const CalenderDate = ({ selected, date }) => {
     return (
       <div
@@ -228,8 +228,6 @@ function Page() {
       });
     }
   }, [data, isLoading, error, setPageInfo]);
-
-  console.log('pageInfo',pageInfo)
 
   return (
     <div style={{ height: "calc(100vh - 60px)" }}>
