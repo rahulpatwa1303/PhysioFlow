@@ -1,4 +1,4 @@
-import { MongoClient,ObjectId } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import clientPromise from "@/utils/mongodb";
 import { NextResponse } from "next/server";
 
@@ -13,38 +13,43 @@ export async function GET(req) {
   }
   requestedDate.setHours(0, 0, 0, 0);
   const unixTimestamp = (requestedDate.getTime() / 1000) * 1000;
-
-  const visitsForTheDate = await db
-    .collection("visits_for_the_day")
-    .aggregate([
-      {
-        $match: {
-          date: unixTimestamp,
+  try {
+    const visitsForTheDate = await db
+      .collection("visits_for_the_day")
+      .aggregate([
+        {
+          $match: {
+            date: unixTimestamp,
+          },
         },
-      },
-      {
-        $lookup: {
-          from: "patient",
-          localField: "patient",
-          foreignField: "_id",
-          as: "patient",
+        {
+          $lookup: {
+            from: "patient",
+            localField: "patient",
+            foreignField: "_id",
+            as: "patient",
+          },
         },
-      },
-      { $unwind: "$patient" },
-      {
-        $project: {
-          _id: 1,
-          date: 1,
-          isComplete: 1,
-          completedDate: 1,
-          completedTime: 1,
-          patient: { name: 1, address: 1, fee_per_visit: 1 },
+        { $unwind: "$patient" },
+        {
+          $project: {
+            _id: 1,
+            date: 1,
+            isComplete: 1,
+            completedDate: 1,
+            completedTime: 1,
+            patient: { name: 1, address: 1, fee_per_visit: 1 },
+          },
         },
-      },
-    ])
-    .toArray();
-
-  return NextResponse.json({ visitsForTheDate });
+      ])
+      .toArray();
+    return NextResponse.json({ visitsForTheDate });
+  } catch {
+    return NextResponse.json(
+      { error: "some error has occured" },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST() {
@@ -68,11 +73,11 @@ export async function PUT(request) {
   const data = await request.json();
   const date = new Date();
   await db.collection("visits_for_the_day").updateOne(
-    { "_id":new ObjectId(data._id) },
+    { _id: new ObjectId(data._id) },
     {
-      "$set": {
-        "isComplete": data.markAs,
-        "markedOn": date,
+      $set: {
+        isComplete: data.markAs,
+        markedOn: date,
       },
     }
   );
