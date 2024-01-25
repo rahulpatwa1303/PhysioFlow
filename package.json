@@ -17,7 +17,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cron": "^3.1.6",
-    "dotenv": "^16.3.1",
     "embla-carousel-autoplay": "^8.0.0-rc20",
     "embla-carousel-react": "^8.0.0-rc19",
     "lucide-react": "^0.307.0",
@@ -33,6 +32,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
+    "dotenv": "^16.4.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "postcss": "^8",
