@@ -3,9 +3,8 @@
 import { MongoClient } from "mongodb";
 
 const uri = process.env.MONGO;
-console.log('uri',uri)
+
 const options = {
-  useUnifiedTopology: true,
   useNewUrlParser: true,
 };
 
