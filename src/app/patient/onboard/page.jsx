@@ -21,6 +21,7 @@ function Page() {
     age: "",
     phone_number: "",
     address: "",
+    gender: "",
 
     reason_for_visit: "",
     past_medical_condition: "",
@@ -36,11 +37,13 @@ function Page() {
     "reason_for_visit",
     "fee_per_visit",
     "payment_frequency",
+    "gender"
   ];
 
   const stepMappings = {
     name: 1,
     phone_number: 1,
+    gender:1,
     reason_for_visit: 2,
     fee_per_visit: 3,
     payment_frequency: 3,
@@ -92,6 +95,14 @@ function Page() {
             [name]: !phoneNumberRegex.test(value),
             [`${name}ErrorMsg`]: errorMsg,
           };
+
+        case "gender":
+          updated = value === "" ? true : false;
+          return {
+            ...state,
+            [name]: updated
+          };
+
         case "reason_for_visit":
           updated = value === "" ? true : false;
           return { ...state, reason_for_visit: updated };
@@ -186,6 +197,7 @@ function Page() {
   }
 
   const checkForErrors = () => {
+    requiredFields.some((field) => console.log(form[field]))
     if (requiredFields.some((field) => form[field] === "")) {
       return false;
     }
@@ -216,6 +228,7 @@ function Page() {
     }
     if (action === "finish") {
       const isRequiredFieldEmpty = checkForErrors();
+      console.log('isRequiredFieldEmpty',isRequiredFieldEmpty)
       if (isRequiredFieldEmpty) {
         handleSubmitForm();
       } else {
@@ -230,7 +243,7 @@ function Page() {
         const maxStep = Math.min(...stepsWithEmptyFields);
 
         updateFormStatus({ ...formStatus, currentStep: maxStep });
-
+        console.log('whichFieldAreEmpty',whichFieldAreEmpty,stepMappings)
         const errorObject = {};
 
         whichFieldAreEmpty.forEach((field) => {

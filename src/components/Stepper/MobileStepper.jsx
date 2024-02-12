@@ -6,7 +6,7 @@ const CircleStepper = ({ progress, steps }) => {
     // circumference - (circumference * progress) / 100
     400 - (400 * progress) / 100
   );
-
+    console.log('dashOffset',dashOffset,progress)
   return (
     <div className="relative w-28 h-28">
       <svg className="w-full h-full" viewBox="0 0 100 100">

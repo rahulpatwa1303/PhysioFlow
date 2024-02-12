@@ -10,6 +10,9 @@ import { EditVisitInfo } from "./dialogContent";
 import axios from "axios";
 import { useQuery } from "react-query";
 import Loading from "@/assests/icon/PhysioIcon/Loading";
+import Notification from "@/components/Notification/Notification";
+
+
 
 function Page() {
   const carouselRef = useRef(null);

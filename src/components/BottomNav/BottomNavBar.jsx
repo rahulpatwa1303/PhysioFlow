@@ -32,7 +32,7 @@ function BottomNavBar() {
     },
     {
       name: "calender",
-      route: "/calender",
+      route: "/patient/list",
       icon: <Patient />,
     },
     {

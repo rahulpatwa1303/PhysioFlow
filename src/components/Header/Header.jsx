@@ -2,6 +2,7 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import { Bell } from "lucide-react";
+import NotificationComponent from "../Notification/Notification";
 
 function Header() {
   const router = usePathname();
@@ -17,7 +18,7 @@ function Header() {
     <div className="flex justify-between py-4 px-6 font-semibold text-customFontColor font-[Lato] text-lg items-center">
       <div></div>
       <div>{headTitle}</div>
-      <div>{router === "/home" && <Bell size={20} />}</div>
+      <div><NotificationComponent/></div>
     </div>
   );
 }
