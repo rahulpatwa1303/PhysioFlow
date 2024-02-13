@@ -20,11 +20,11 @@ function BottomNavBar() {
       route: "/home",
       icon: <Home />,
     },
-    {
-      name: "performance",
-      route: "/performance",
-      icon: <BookOpen />,
-    },
+    // {
+    //   name: "performance",
+    //   route: "/performance",
+    //   icon: <BookOpen />,
+    // },
     {
       name: "onboard new patient",
       route: "/patient/onboard",
@@ -35,11 +35,11 @@ function BottomNavBar() {
       route: "/patient/list",
       icon: <Patient />,
     },
-    {
-      name: "profile",
-      route: "/profile",
-      icon: <CircleUser />,
-    },
+    // {
+    //   name: "profile",
+    //   route: "/profile",
+    //   icon: <CircleUser />,
+    // },
   ];
   return (
     <div className=" w-full  max-w-sm h-[58px] rounded-lg drop-shadow-lg bg-gradient-to-b from-gradientTop  to-gradientBottom">
