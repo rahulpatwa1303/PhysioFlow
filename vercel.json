@@ -1,6 +1,6 @@
 {
     "crons": [{
       "path": "/api/visits/per_day_visit",
-      "schedule": "*/1 * * * *"
+      "schedule": "* * * * *"
     }]
   }
